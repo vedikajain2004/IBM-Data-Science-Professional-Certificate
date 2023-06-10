@@ -1,1 +1,1 @@
-GitHub repo to share the notebook.
+GitHub repo to share notebooks as part of the courses.
