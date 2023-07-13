@@ -61,12 +61,13 @@ def get_pie_chart(entered_site):
               [Input(component_id='site-dropdown', component_property='value'), Input(component_id="payload-slider", component_property="value")])
 def get_scatter_chart(es, pl):
     if es == 'ALL':
-        f = px.scatter(spacex_df, x='Payload Mass (kg)', 
+        f_df = spacex_df[pl[0] < spacex_df['Payload Mass (kg)']][spacex_df['Payload Mass (kg)'] < pl[1]]
+        f = px.scatter(f_df, x='Payload Mass (kg)', 
         y='class', color='Booster Version Category', 
         title='Correlation between Payload and Success for all Sites')
         return f
     else:
-        f_df = spacex_df[spacex_df['Launch Site'] == es]
+        f_df = spacex_df[spacex_df['Launch Site'] == es][pl[0] < spacex_df['Payload Mass (kg)']][spacex_df['Payload Mass (kg)'] < pl[1]]
         f = px.scatter(f_df, x='Payload Mass (kg)', 
         y='class', color='Booster Version Category',
         title='Correlation between Payload and Success for '+es)
